@@ -7,7 +7,11 @@ export default function App() {
   return (
     <>
       <nav>
-        <h1>TwoFiveTwo</h1>
+        <img
+        src="/twofivetwologo.png"
+        alt="TwoFiveTwo logo"
+        style={{ height: "100px", objectFit: "contain" }}
+        />
         <div className="nav-buttons">
           <button className={page === "home" ? "active" : ""} onClick={() => setPage("home")}>
             Fighting poverty
