@@ -1,99 +1,20 @@
 import React, { useState } from "react";
-import './App.css';
-function DonateModal({ visible, onClose, onDonate }) {
-  const [name, setName] = useState("");
-  const [email, setEmail] = useState("");
-  const [amount, setAmount] = useState("");
-
-  if (!visible) return null;
-
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!name || !email || !amount) {
-      alert("Please fill in all fields");
-      return;
-    }
-    onDonate({ name, email, amount });
-    setName("");
-    setEmail("");
-    setAmount("");
-  };
-
-  return (
-    <div className="modal-overlay" role="dialog" aria-modal="true">
-      <div className="modal-content">
-        <button className="modal-close" onClick={onClose} aria-label="Close donation form">
-          &times;
-        </button>
-        <h2>Donate Now</h2>
-        <form onSubmit={handleSubmit} className="donate-form">
-          <input
-            type="text"
-            placeholder="Your Name"
-            value={name}
-            onChange={(e) => setName(e.target.value)}
-            required
-            autoFocus
-          />
-          <input
-            type="email"
-            placeholder="Your Email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
-            required
-          />
-          <input
-            type="number"
-            placeholder="Donation Amount (£)"
-            min="1"
-            value={amount}
-            onChange={(e) => setAmount(e.target.value)}
-            required
-          />
-          <button type="submit" className="button donate-button">
-            Confirm Donation
-          </button>
-        </form>
-      </div>
-    </div>
-  );
-}
+import "./App.css";
 
 export default function App() {
   const [page, setPage] = useState("home");
-  const [donateModalVisible, setDonateModalVisible] = useState(false);
-  const [thankYou, setThankYou] = useState(null);
-
-  const handleDonateClick = () => {
-    setThankYou(null);
-    setDonateModalVisible(true);
-  };
-
-  const handleDonateSubmit = ({ name, email, amount }) => {
-    setDonateModalVisible(false);
-    setThankYou(`Thank you, ${name}, for donating £${amount}! We will contact you at ${email}.`);
-  };
 
   return (
     <>
       <nav>
         <h1>TwoFiveTwo</h1>
         <div className="nav-buttons">
-          <button
-            className={page === "home" ? "active" : ""}
-            onClick={() => setPage("home")}
-          >
+          <button className={page === "home" ? "active" : ""} onClick={() => setPage("home")}>
             Fighting poverty
           </button>
-          <button
-            className={page === "about" ? "active" : ""}
-            onClick={() => setPage("about")}
-          >
+          <button className={page === "about" ? "active" : ""} onClick={() => setPage("about")}>
             Get involved
           </button>
-          <a href="https://buy.stripe.com/test_5kQ7sDcr66azgQ435w3VC00" target="_blank" rel="noopener noreferrer">
-            <button className="donate">Donate Now</button>
-          </a>
         </div>
       </nav>
 
@@ -103,9 +24,14 @@ export default function App() {
             <div className="hero-content">
               <h2>SOMALILAND DROUGHT APPEAL</h2>
               <p>Your donation could bring life-saving aid to families affected by the ongoing drought in Somaliland.</p>
-              <button className="button donate-button" onClick={handleDonateClick}>
-                DONATE NOW
-              </button>
+              <div className="donation-options">
+                <a href="https://buy.stripe.com/test_5kA6qu5rD9Ej6I4bIJ" target="_blank" rel="noopener noreferrer">
+                  <button className="button donate-button">£10</button>
+                </a>
+                <a href="https://buy.stripe.com/test_fZecPI6cf0frgL6aEG" target="_blank" rel="noopener noreferrer">
+                  <button className="button donate-button">£20</button>
+                </a>
+              </div>
             </div>
           </section>
 
@@ -116,7 +42,7 @@ export default function App() {
                 alt="Somaliland drought update"
               />
               <h3>Somaliland drought update</h3>
-              <button className="button">READ MORE</button>
+              <button className="button" onClick={() => setPage("droughtUpdate")}>READ MORE</button>
             </div>
             <div className="card">
               <img
@@ -124,7 +50,7 @@ export default function App() {
                 alt="Emergency relief initiatives"
               />
               <h3>Emergency relief initiatives</h3>
-              <button className="button">LEARN MORE</button>
+              <button className="button" onClick={() => setPage("emergencyInitiatives")}>LEARN MORE</button>
             </div>
             <div className="card">
               <img
@@ -132,14 +58,18 @@ export default function App() {
                 alt="Food insecurity crisis in the Horn of Africa"
               />
               <h3>Food insecurity crisis in the Horn of Africa</h3>
-              <button className="button">WATCH THE VIDEO</button>
+              <button className="button" onClick={() => alert("Video feature coming soon!")}>WATCH THE VIDEO</button>
             </div>
             <div className="card">
-              <h3>DONATE NOW</h3>
-              <button className="button donate-button" onClick={handleDonateClick}>
-                DONATE
-              </button>
-              {thankYou && <p style={{ marginTop: "1rem", color: "green", fontWeight: "600" }}>{thankYou}</p>}
+              <h3>Support Us</h3>
+              <div className="donation-options">
+                <a href="https://buy.stripe.com/test_5kA6qu5rD9Ej6I4bIJ" target="_blank" rel="noopener noreferrer">
+                  <button className="button donate-button">£10</button>
+                </a>
+                <a href="https://buy.stripe.com/test_fZecPI6cf0frgL6aEG" target="_blank" rel="noopener noreferrer">
+                  <button className="button donate-button">£20</button>
+                </a>
+              </div>
             </div>
           </section>
         </>
@@ -147,27 +77,76 @@ export default function App() {
 
       {page === "about" && (
         <section style={{ padding: "4rem 1rem", maxWidth: "700px", margin: "auto" }}>
-          <div style={{ background: "white", borderRadius: "2rem", boxShadow: "0 2px 10px rgba(0,0,0,0.1)", padding: "3rem" }}>
-            <h2 style={{ color: "#f37021", fontWeight: "bold", marginBottom: "1rem" }}>
-              About TwoFiveTwo
-            </h2>
+          <div
+            style={{
+              background: "white",
+              borderRadius: "2rem",
+              boxShadow: "0 2px 10px rgba(0,0,0,0.1)",
+              padding: "3rem",
+            }}
+          >
+            <h2 style={{ color: "#26a138", fontWeight: "bold", marginBottom: "1rem" }}>About TwoFiveTwo</h2>
             <p style={{ color: "#444", fontSize: "1.1rem", lineHeight: "1.6" }}>
-              TwoFiveTwo is a grassroots charity supporting the people of Somaliland. With micro-donations as small as £2.52, we bring food, water, and healthcare to communities facing urgent crises.
+              TwoFiveTwo is a grassroots charity supporting the people of Somaliland. With micro-donations, we bring food,
+              water, and healthcare to communities facing urgent crises.
               Together, we can make lasting change. Join our mission to empower, uplift, and provide hope to those in need.
             </p>
           </div>
         </section>
       )}
 
-      <footer>
-        &copy; {new Date().getFullYear()} <strong>TwoFiveTwo</strong>. All rights reserved.
-      </footer>
+      {page === "droughtUpdate" && (
+        <section style={{ padding: "2rem", maxWidth: "700px", margin: "auto" }}>
+          <button onClick={() => setPage("home")} style={{ marginBottom: "1rem" }}>← Back to Home</button>
+          <h2>Somaliland Drought Update</h2>
+          <p>
+            Somaliland continues to face one of the worst droughts in decades, severely affecting millions of people and livestock.
+            The drought has led to a critical shortage of water and food, forcing families to migrate in search of resources.
+          </p>
+          <p>
+            Recent UN reports highlight that over 60% of Somaliland's population is food insecure, and malnutrition rates, especially among children, have soared.
+            Emergency water trucking and food distributions are ongoing, but funding gaps remain a significant challenge.
+          </p>
+          <p>
+            TwoFiveTwo is committed to supporting local communities by providing clean water access points, emergency food supplies, and healthcare services.
+            Your donations directly fund these life-saving interventions.
+          </p>
+          <img
+            src="https://africanarguments.org/wp-content/uploads/2024/02/Somaliland-drought-egal-family.jpg"
+            alt="Somaliland drought"
+            style={{ width: "100%", borderRadius: "1rem", marginTop: "1rem" }}
+          />
+        </section>
+      )}
 
-      <DonateModal
-        visible={donateModalVisible}
-        onClose={() => setDonateModalVisible(false)}
-        onDonate={handleDonateSubmit}
-      />
+      {page === "emergencyInitiatives" && (
+        <section style={{ padding: "2rem", maxWidth: "700px", margin: "auto" }}>
+          <button onClick={() => setPage("home")} style={{ marginBottom: "1rem" }}>← Back to Home</button>
+          <h2>Emergency Relief Initiatives</h2>
+          <p>
+            In response to the ongoing drought crisis, TwoFiveTwo has launched multiple emergency relief initiatives focused on:
+          </p>
+          <ul>
+            <li><strong>Water provision:</strong> Installation of water tanks and boreholes, plus water trucking to remote communities.</li>
+            <li><strong>Food aid:</strong> Distribution of emergency food rations to vulnerable families, especially children and pregnant women.</li>
+            <li><strong>Healthcare access:</strong> Mobile clinics providing basic healthcare and nutritional support to drought-affected populations.</li>
+            <li><strong>Livelihood support:</strong> Providing fodder and veterinary care for livestock to help pastoralist communities sustain their herds.</li>
+          </ul>
+          <p>
+            These initiatives rely heavily on community partnerships and donor generosity to reach the most affected areas.
+            By contributing, you help sustain hope and survival for thousands enduring this humanitarian emergency.
+          </p>
+          <img
+            src="https://www.somaliland.com/wp-content/uploads/2020/03/maxresdefault.jpg"
+            alt="Emergency relief in Somaliland"
+            style={{ width: "100%", borderRadius: "1rem", marginTop: "1rem" }}
+          />
+        </section>
+      )}
+
+      <footer>
+        <strong>TwoFiveTwo</strong> {new Date().getFullYear()}
+      </footer>
     </>
   );
 }

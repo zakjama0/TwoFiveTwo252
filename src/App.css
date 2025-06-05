@@ -299,8 +299,9 @@ section[style] > div {
   padding: 0.85rem 0;
   font-size: 1.15rem;
   border: none;
+  margin-bottom: 1rem;
   cursor: pointer;
-  box-shadow: 0 8px 22px rgba(38, 161, 56, 0.6);
+  box-shadow: 0 2px 10px rgba(38, 161, 56, 0.6);
   transition: background 0.3s ease, box-shadow 0.3s ease;
   user-select: none;
 }
@@ -390,4 +391,27 @@ section[style] > div {
   nav h1 {
     font-size: 1.5rem;
   }
+  .donation-options {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-top: 4rem;
+}
+
+.donate-small {
+  background-color: #26a138;
+  color: white;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.donate-small:hover {
+  background-color: #1e8c2f;
+}
+
+
 }
