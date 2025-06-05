@@ -25,10 +25,10 @@ export default function App() {
               <h2>SOMALILAND DROUGHT APPEAL</h2>
               <p>Your donation could bring life-saving aid to families affected by the ongoing drought in Somaliland.</p>
               <div className="donation-options">
-                <a href="https://buy.stripe.com/test_5kA6qu5rD9Ej6I4bIJ" target="_blank" rel="noopener noreferrer">
+                <a href="https://buy.stripe.com/eVq14m7Uy1wRbCkdmlejK01" target="_blank" rel="noopener noreferrer">
                   <button className="button donate-button">£10</button>
                 </a>
-                <a href="https://buy.stripe.com/test_fZecPI6cf0frgL6aEG" target="_blank" rel="noopener noreferrer">
+                <a href="https://buy.stripe.com/9B6fZg5Mq5N7cGo965ejK02" target="_blank" rel="noopener noreferrer">
                   <button className="button donate-button">£20</button>
                 </a>
               </div>
@@ -58,8 +58,11 @@ export default function App() {
                 alt="Food insecurity crisis in the Horn of Africa"
               />
               <h3>Food insecurity crisis in the Horn of Africa</h3>
-              <button className="button" onClick={() => alert("Video feature coming soon!")}>WATCH THE VIDEO</button>
-            </div>
+              <a href='https://www.youtube.com/watch?v=7Oz_eL5z2mc' target="_blank" rel="noopener noreferrer">
+                  <button className="button" >WATCH THE VIDEO</button>
+            
+                </a>
+              </div>
             <div className="card">
               <h3>Support Us</h3>
               <div className="donation-options">
@@ -87,8 +90,10 @@ export default function App() {
           >
             <h2 style={{ color: "#26a138", fontWeight: "bold", marginBottom: "1rem" }}>About TwoFiveTwo</h2>
             <p style={{ color: "#444", fontSize: "1.1rem", lineHeight: "1.6" }}>
-              TwoFiveTwo is a grassroots charity supporting the people of Somaliland. With micro-donations, we bring food,
-              water, and healthcare to communities facing urgent crises.
+              TwoFiveTwo is a grassroots initiative collected by an individual aiming to
+              deliver urgent support to communities in Somaliland. Through small
+              donations, we provide food, water, and healthcare to families
+              suffering from the effects of drought and poverty.
               Together, we can make lasting change. Join our mission to empower, uplift, and provide hope to those in need.
             </p>
           </div>
@@ -97,7 +102,7 @@ export default function App() {
 
       {page === "droughtUpdate" && (
         <section style={{ padding: "2rem", maxWidth: "700px", margin: "auto" }}>
-          <button onClick={() => setPage("home")} style={{ marginBottom: "1rem" }}>← Back to Home</button>
+          <button className='button'onClick={() => setPage("home")}>← Back to Home</button>
           <h2>Somaliland Drought Update</h2>
           <p>
             Somaliland continues to face one of the worst droughts in decades, severely affecting millions of people and livestock.
@@ -121,7 +126,7 @@ export default function App() {
 
       {page === "emergencyInitiatives" && (
         <section style={{ padding: "2rem", maxWidth: "700px", margin: "auto" }}>
-          <button onClick={() => setPage("home")} style={{ marginBottom: "1rem" }}>← Back to Home</button>
+          <button className='button'onClick={() => setPage("home")}>← Back to Home</button>
           <h2>Emergency Relief Initiatives</h2>
           <p>
             In response to the ongoing drought crisis, TwoFiveTwo has launched multiple emergency relief initiatives focused on:
